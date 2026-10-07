@@ -41,11 +41,9 @@ CREATE DATABASE IF NOT EXISTS `tcp-server`;
 USE `tcp-server`;
 
 CREATE TABLE IF NOT EXISTS received_data (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    client_ip VARCHAR(45) NOT NULL,
-    client_port INT NOT NULL,
-    message LONGTEXT NOT NULL,
-    received_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    value VARCHAR(256) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
@@ -97,9 +95,7 @@ Node.js TCP Server
     │ INSERT
     ▼
 MySQL :3306
-    │
-    ▼
-tcp-server.received_data
+    └── tcp-server.received_data (strings)
 ```
 
 ## Checking Connections
@@ -113,9 +109,7 @@ netstat -ano | findstr :5000
 ## Checking Database Records
 
 ```sql
-SELECT *
-FROM received_data
-ORDER BY id DESC;
+SELECT * FROM received_data ORDER BY id DESC;
 ```
 
 ## Security

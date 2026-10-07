@@ -47,8 +47,7 @@ client.connect(config.SERVER_PORT, config.SERVER_IP, () => {
   };
   const data = JSON.stringify(message);
   client.write(data);
-  console.log("Data sent:");
-  console.log(data);
+  console.log(`Data sent: ${JSON.stringify(message, null, 2)}`);
 });
 client.on("data", (data) => {
   console.log("Server response:");

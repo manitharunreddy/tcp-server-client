@@ -1,19 +1,7 @@
 import net from "node:net";
-import db from "./db";
 import { config } from "./config";
-
-async function testDatabaseConnection(): Promise<void> {
-  try {
-    const connection = await db.getConnection();
-
-    console.log("MySQL connected successfully");
-
-    connection.release();
-  } catch (error) {
-    console.error("MySQL connection failed:", error);
-    process.exit(1);
-  }
-}
+import { testDatabaseConnection } from "./utils/lib";
+import db from "./db";
 
 const server = net.createServer((socket) => {
   const clientIP = socket.remoteAddress ?? "unknown";
@@ -37,21 +25,14 @@ const server = net.createServer((socket) => {
         return;
       }
 
-      const [result] = await db.execute(
+      await db.execute(
         `
-          INSERT INTO received_data
-          (
-            client_ip,
-            client_port,
-            message
-          )
-          VALUES (?, ?, ?)
+          INSERT INTO received_data (value)
+          VALUES (?)
         `,
-        [clientIP, clientPort, message]
+        [message],
       );
-
       console.log("Data saved to MySQL");
-      console.log("Insert result:", result);
 
       socket.write("OK: Data received\n");
     } catch (error) {
@@ -70,17 +51,17 @@ const server = net.createServer((socket) => {
   });
 });
 
-async function startServer(): Promise<void> {
+const startServer = async (): Promise<void> => {
   await testDatabaseConnection();
 
   server.listen(config.TCP_PORT, "0.0.0.0", () => {
     console.log("--------------------------------");
-    console.log("TCP SERVER STARTED");
+    console.log("TCP SERVER STARTED SUCCESSFULLY");
     console.log("--------------------------------");
     console.log(`TCP Port : ${config.TCP_PORT}`);
     console.log(`MySQL    : ${config.DB_HOST}:${config.DB_PORT}`);
     console.log("--------------------------------");
   });
-}
+};
 
 startServer();

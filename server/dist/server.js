@@ -29,6 +29,396 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
+// node_modules/dotenv/dist/index.cjs
+var require_dist = __commonJS({
+  "node_modules/dotenv/dist/index.cjs"(exports2, module2) {
+    var S = (e, o) => () => {
+      try {
+        return o || e((o = { exports: {} }).exports, o), o.exports;
+      } catch (t) {
+        throw o = 0, t;
+      }
+    };
+    var j = S((xe, U) => {
+      function G(e) {
+        return typeof e == "string" ? !["false", "0", "no", "off", ""].includes(e.toLowerCase()) : !!e;
+      }
+      function X(e = process.env) {
+        let o = {};
+        for (let t of ["ENCODING", "PATH", "QUIET", "DEBUG", "OVERRIDE", "FAST"]) {
+          let n = e[`DOTENV_${t}`] != null ? e[`DOTENV_${t}`] : e[`DOTENV_CONFIG_${t}`];
+          n != null && (o[t.toLowerCase()] = t === "ENCODING" || t === "PATH" ? n : G(n));
+        }
+        return o;
+      }
+      U.exports = { parseBoolean: G, optionsFromEnv: X };
+    });
+    var N = S((ye, x) => {
+      var Y = require("fs"), k = require("path"), z = require("os"), { URL: Z, fileURLToPath: ee } = require("url"), { parseBoolean: $, optionsFromEnv: B } = j(), te = /(?:^|^)\s*(?:export\s+)?([\w.-]+)(?:\s*=\s*?|:\s+?)(\s*'(?:\\'|[^'])*'|\s*"(?:\\"|[^"])*"|\s*`(?:\\`|[^`])*`|[^#\r\n]+)?\s*(?:#.*)?(?:$|$)/mg, b = new Uint8Array(256);
+      for (let e = 48; e <= 57; e++) b[e] = 1;
+      for (let e = 65; e <= 90; e++) b[e] = 1;
+      for (let e = 97; e <= 122; e++) b[e] = 1;
+      b[45] = 1;
+      b[46] = 1;
+      b[95] = 1;
+      function re(e) {
+        let o = {}, t = e.toString();
+        t = t.replace(/\r\n?/mg, `
+`);
+        let n;
+        for (; (n = te.exec(t)) != null; ) {
+          let r = n[1], s = n[2] || "";
+          s = s.trim();
+          let i = s[0];
+          s = s.replace(/^(['"`])([\s\S]*)\1$/mg, "$2"), i === '"' && (s = s.replace(/\\n/g, `
+`), s = s.replace(/\\r/g, "\r")), o[r] = s;
+        }
+        return o;
+      }
+      function w(e) {
+        return e <= 32 ? e === 32 || e >= 9 && e <= 13 : e >= 160 && (e === 160 || e === 5760 || e >= 8192 && e <= 8202 || e === 8232 || e === 8233 || e === 8239 || e === 8287 || e === 12288 || e === 65279);
+      }
+      function O(e) {
+        return e === 10 || e === 8232 || e === 8233;
+      }
+      function oe(e) {
+        let o = {}, t = typeof e == "string" ? e : e.toString();
+        t.indexOf("\r") !== -1 && (t = t.replace(/\r\n?/g, `
+`));
+        let n = t.length, r = 0;
+        for (; r < n; ) {
+          let s = t.charCodeAt(r);
+          for (; r < n && w(s); ) r++, s = t.charCodeAt(r);
+          if (r >= n) break;
+          if (s === 35) {
+            for (; r < n && !O(t.charCodeAt(r)); ) r++;
+            continue;
+          }
+          let i = -1;
+          if (s === 101 && r + 6 < n && t.charCodeAt(r + 1) === 120 && t.charCodeAt(r + 2) === 112 && t.charCodeAt(r + 3) === 111 && t.charCodeAt(r + 4) === 114 && t.charCodeAt(r + 5) === 116) {
+            let v = t.charCodeAt(r + 6);
+            if (w(v)) {
+              let u = r + 7;
+              for (; u < n && w(t.charCodeAt(u)); ) u++;
+              b[t.charCodeAt(u)] && (i = r + 6, r = u);
+            } else s = t.charCodeAt(r);
+          }
+          let l = r, d = 0;
+          for (; r < n && (d = t.charCodeAt(r), b[d]); ) r++;
+          if (r === l) {
+            for (; r < n && !O(t.charCodeAt(r)); ) r++;
+            continue;
+          }
+          let p = t.slice(l, r), f = r;
+          if (r >= n && (d = 0), w(d)) do
+            r++, d = r < n ? t.charCodeAt(r) : 0;
+          while (w(d));
+          if (d === 61) r++;
+          else if (d === 58 && r === f && r + 1 < n && w(t.charCodeAt(r + 1))) r += 2;
+          else {
+            for (r = i === -1 ? f : i; r < n && !O(t.charCodeAt(r)); ) r++;
+            continue;
+          }
+          let c = r, a = r;
+          for (; a < n && w(t.charCodeAt(a)); ) a++;
+          let g = t.charCodeAt(a), h, y = false;
+          if (g === 39 || g === 34 || g === 96) {
+            let v = t[a], u = t.indexOf(v, a + 1), m = -1, C = -1;
+            for (; u !== -1; ) {
+              let q = t.charCodeAt(u - 1) === 92, E = u + 1;
+              for (; E < n && !O(t.charCodeAt(E)) && w(t.charCodeAt(E)); ) E++;
+              if ((E === n || O(t.charCodeAt(E)) || t.charCodeAt(E) === 35) && (m = u, C = E), !q) break;
+              u = t.indexOf(v, u + 1);
+            }
+            if (m !== -1) {
+              if (h = t.slice(a + 1, m), r = C, t.charCodeAt(r) === 35) for (; r < n && !O(t.charCodeAt(r)); ) r++;
+              y = true;
+            }
+          }
+          if (!y) {
+            let v = t.indexOf(`
+`, c);
+            v === -1 && (v = n);
+            let u;
+            if (n < 4096) u = t.indexOf("#", c), (u === -1 || u > v) && (u = v);
+            else for (u = c; u < v && t.charCodeAt(u) !== 35; ) u++;
+            let m = c, C = u;
+            for (; m < C && w(t.charCodeAt(m)); ) m++;
+            for (; C > m && w(t.charCodeAt(C - 1)); ) C--;
+            let q = t.charCodeAt(m);
+            if (C - m >= 2 && (q === 39 || q === 34 || q === 96) && t.charCodeAt(C - 1) === q ? h = t.slice(m + 1, C - 1) : h = t.slice(m, C), r = u, u < v) for (; r < n && !O(t.charCodeAt(r)); ) r++;
+          }
+          g === 34 && (y || a < r) && h.indexOf("\\") !== -1 && (h = h.replace(/\\n/g, `
+`).replace(/\\r/g, "\r")), o[p] = h;
+        }
+        return o;
+      }
+      function ne(e, o) {
+        return o && $(o.fast) ? oe(e) : re(e);
+      }
+      function T(e) {
+        console.log(`\u2506 ${e}`);
+      }
+      function se(e) {
+        console.error(`\u25C7 ${e}`);
+      }
+      function V(e) {
+        return e[0] === "~" ? k.join(z.homedir(), e.slice(1)) : e;
+      }
+      function ie(e = {}) {
+        return { ...B(), ...e };
+      }
+      function ce(e) {
+        e = ie(e);
+        let o = k.resolve(process.cwd(), ".env"), t = "utf8", n = process.env;
+        e && e.processEnv != null && (n = e.processEnv);
+        let r = $(e && e.debug);
+        e && e.encoding ? t = e.encoding : r && T("no encoding is specified (UTF-8 is used by default)");
+        let s = [o];
+        if (e && e.path) if (!Array.isArray(e.path)) s = [V(e.path)];
+        else {
+          s = [];
+          for (let c of e.path) s.push(V(c));
+        }
+        let i, l = {}, d = { fast: e.fast };
+        for (let c of s) try {
+          let a = A.parse(Y.readFileSync(c, { encoding: t }), d);
+          A.populate(l, a, e);
+        } catch (a) {
+          r && T(`failed to load ${c} ${a.message}`), i = a;
+        }
+        let p = A.populate(n, l, e), f = $(Object.prototype.hasOwnProperty.call(e, "quiet") ? e.quiet : B(n).quiet);
+        if (r || !f) {
+          let c = Object.keys(p).length, a = [];
+          for (let g of s) try {
+            let h = k.relative(process.cwd(), g instanceof Z ? ee(g) : g);
+            a.push(h);
+          } catch (h) {
+            r && T(`failed to load ${g} ${h.message}`), i = h;
+          }
+          se(`injected env (${c}) from ${a.join(",")}`);
+        }
+        return i ? { parsed: l, error: i } : { parsed: l };
+      }
+      function ae(e) {
+        return A.configDotenv(e);
+      }
+      function le(e, o, t = {}) {
+        let n = $(t && t.debug), r = $(t && t.override), s = {};
+        if (e === null || typeof e != "object" || o === null || typeof o != "object") {
+          let i = new Error("OBJECT_REQUIRED: Please check the processEnv argument being passed to populate");
+          throw i.code = "OBJECT_REQUIRED", i;
+        }
+        for (let i of Object.keys(o)) Object.prototype.hasOwnProperty.call(e, i) ? (r === true && (e[i] = o[i], s[i] = o[i]), n && T(r === true ? `"${i}" is already defined and WAS overwritten` : `"${i}" is already defined and was NOT overwritten`)) : (e[i] = o[i], s[i] = o[i]);
+        return s;
+      }
+      var A = { configDotenv: ce, config: ae, parse: ne, populate: le };
+      x.exports.configDotenv = A.configDotenv;
+      x.exports.config = A.config;
+      x.exports.parse = A.parse;
+      x.exports.populate = A.populate;
+      x.exports = A;
+    });
+    var M = S((Te, W) => {
+      var _ = require("child_process"), fe = require("fs"), L = require("path");
+      function ue(e) {
+        let o = ['"'], t = 0;
+        for (let n of e) {
+          if (n === "\\") {
+            t++;
+            continue;
+          }
+          n === '"' ? o.push("\\".repeat(t * 2 + 1), '"') : o.push("\\".repeat(t), n), t = 0;
+        }
+        return o.push("\\".repeat(t * 2), '"'), o.join("");
+      }
+      function H(e, o = 1) {
+        for (let t = 0; t < o; t++) {
+          let n = [];
+          for (let r of e) {
+            let s = r.charCodeAt(0), i = s >= 48 && s <= 57 || s >= 65 && s <= 90 || s >= 97 && s <= 122, l = "\\/:._-".includes(r);
+            !i && !l && s < 128 && n.push("^"), n.push(r);
+          }
+          e = n.join("");
+        }
+        return e;
+      }
+      function P(e, o) {
+        let t = Object.keys(e).reverse().find((n) => n.toUpperCase() === o);
+        return t === void 0 ? void 0 : e[t];
+      }
+      function de(e, o, t) {
+        let n = (P(o, "PATHEXT") || ".COM;.EXE;.BAT;.CMD").split(";").filter(Boolean), s = n.some((l) => e.toLowerCase().endsWith(l.toLowerCase())) ? ["", ...n] : [...n, ""], i = /[\\/]/.test(e) ? [t] : [t, ...(P(o, "PATH") || "").split(";")];
+        for (let l of i) for (let d of s) {
+          let p = L.resolve(t, l.replace(/^"|"$/g, ""), e + d);
+          try {
+            if (fe.statSync(p).isFile()) return p;
+          } catch {
+          }
+        }
+      }
+      function pe(e, o, t) {
+        if (process.platform !== "win32") return _.spawn(e, o, t);
+        let n = t.env || process.env, r = de(e, n, t.cwd || process.cwd());
+        if (r && /\.(?:exe|com)$/i.test(r)) return _.spawn(r, o, t);
+        let s = /\.(?:bat|cmd)$/i.test(r || e), i = [H(L.normalize(r || e))];
+        for (let d of o) i.push(H(ue(d), s ? 2 : 1));
+        let l = i.join(" ");
+        return _.spawn(P(n, "COMSPEC") || "cmd.exe", ["/d", "/v:off", "/s", "/c", `"${l}"`], { ...t, windowsVerbatimArguments: true });
+      }
+      W.exports = pe;
+    });
+    var K = S(($e, F) => {
+      var he = require("fs"), ge = require("os"), Q = require("path"), me = require("child_process"), ve = M(), R = N(), { optionsFromEnv: Ce } = j();
+      function D() {
+        console.log(["Usage: dotenv run [--help] [-q|--quiet] [--debug] [--override] [--fast] [-f|--file <paths>] [--] <command> [args...]", "", "Run a command with environment variables from a .env file.", "Place dotenv options before the command; all following arguments go to the command.", "", "Options:", "  -f, --file <paths>  .env paths, comma-separated or repeated (default: .env)", "  -q, --quiet suppress the injected env message", "  --debug     enable debug logging", "  --override  override existing environment variables", "  --fast      use the faster character-scanner parser", "", "Environment variables (DOTENV_CONFIG_* names remain as fallbacks):", "  DOTENV_PATH, DOTENV_ENCODING, DOTENV_QUIET,", "  DOTENV_DEBUG, DOTENV_OVERRIDE,", "  DOTENV_FAST"].join(`
+`));
+      }
+      function we(e) {
+        let o = [], t = false, n, r, s, i, l = -1;
+        for (let p = 0; p < e.length; p++) {
+          let f = e[p];
+          if (f === "--") {
+            l = p + 1;
+            break;
+          }
+          if (f === "--help" || f === "-h") return { help: true };
+          if (f === "--quiet" || f === "-q") {
+            n = true;
+            continue;
+          }
+          if (f === "--debug") {
+            r = true;
+            continue;
+          }
+          if (f === "--override") {
+            s = true;
+            continue;
+          }
+          if (f === "--fast") {
+            i = true;
+            continue;
+          }
+          if (f === "-f" || f === "--file" || f.startsWith("-f=") || f.startsWith("--file=")) {
+            let c = f.indexOf("="), a = c === -1 ? f : f.slice(0, c), g = c === -1 ? e[++p] : f.slice(c + 1);
+            if (!g || g === "--") return { error: `${a} requires a path` };
+            let h = g.split(",").map((y) => y.trim()).filter(Boolean);
+            if (h.length === 0) return { error: `${a} requires a path` };
+            o.push(...h), t = true;
+            continue;
+          }
+          if (f.startsWith("-")) return { error: `unknown option: ${f}` };
+          l = p;
+          break;
+        }
+        let d = l === -1 ? [] : e.slice(l);
+        return { paths: o, pathSet: t, quiet: n, debug: r, override: s, fast: i, command: d };
+      }
+      function Ae(e) {
+        return e[0] === "~" ? Q.join(ge.homedir(), e.slice(1)) : e;
+      }
+      function Ee(e) {
+        let o = Ce(), t = { encoding: o.encoding || "utf8", quiet: o.quiet === true, debug: o.debug === true, override: o.override === true, fast: o.fast === true, paths: [".env"], defaultPath: true };
+        return o.path != null && (t.paths = [o.path], t.defaultPath = false), e.pathSet && (t.paths = e.paths, t.defaultPath = false), e.quiet != null && (t.quiet = e.quiet), e.debug != null && (t.debug = e.debug), e.override != null && (t.override = e.override), e.fast != null && (t.fast = e.fast), t;
+      }
+      function be(e) {
+        let o = {}, t = [], n = { override: e.override, debug: e.debug };
+        for (let s of e.paths) {
+          let i = Q.resolve(process.cwd(), Ae(s));
+          try {
+            let l = R.parse(he.readFileSync(i, { encoding: e.encoding }), { fast: e.fast });
+            R.populate(o, l, n), t.push(s);
+          } catch (l) {
+            if (e.debug && console.log(`\u2506 failed to load ${s} ${l.message}`), !(e.defaultPath && l.code === "ENOENT")) throw l;
+          }
+        }
+        return { injected: R.populate(process.env, o, n), loadedPaths: t };
+      }
+      function J(e) {
+        let o = e[0];
+        if (o === "--help" || o === "-h") {
+          D();
+          return;
+        }
+        if (o !== "run") {
+          D(), process.exitCode = 1;
+          return;
+        }
+        let t = we(e.slice(1));
+        if (t.help) {
+          D();
+          return;
+        }
+        if (t.error) {
+          console.error(`dotenv: ${t.error}`), D(), process.exitCode = 1;
+          return;
+        }
+        if (t.command.length === 0) {
+          D(), process.exitCode = 1;
+          return;
+        }
+        let n = Ee(t);
+        try {
+          let c = be(n);
+          if (!n.quiet) {
+            let a = `\u25C7 injected env (${Object.keys(c.injected).length})`;
+            c.loadedPaths.length > 0 && (a += ` from ${c.loadedPaths.join(", ")}`), console.error(a);
+          }
+        } catch (c) {
+          console.error(`dotenv: ${c.message}`), process.exitCode = 1;
+          return;
+        }
+        let r = !!process.stdin.isTTY, s = process.platform !== "win32" && !r, i = ve(t.command[0], t.command.slice(1), { stdio: "inherit", detached: s }), l = /* @__PURE__ */ new Map(), d = 0;
+        function p(c) {
+          if (!(!i.pid || i.exitCode !== null || i.signalCode !== null)) {
+            if (process.platform === "win32") {
+              me.spawnSync("taskkill", ["/pid", String(i.pid), "/T", "/F"], { stdio: "ignore" });
+              return;
+            }
+            try {
+              process.kill(s ? -i.pid : i.pid, c);
+            } catch (a) {
+              if (a.code !== "ESRCH") throw a;
+            }
+          }
+        }
+        function f() {
+          for (let [c, a] of l) process.removeListener(c, a);
+        }
+        for (let c of ["SIGINT", "SIGTERM", "SIGHUP", "SIGQUIT"]) {
+          let a = () => {
+            if (c === "SIGINT") {
+              if (d++, r && process.platform !== "win32" && d === 1) return;
+              if (d > 1) {
+                p(d === 2 ? "SIGTERM" : "SIGKILL");
+                return;
+              }
+            }
+            p(c);
+          };
+          l.set(c, a), process.on(c, a);
+        }
+        i.on("error", function(c) {
+          f(), console.error(`dotenv: ${c.message}`), process.exitCode = 1;
+        }), i.on("exit", function(c, a) {
+          f(), typeof c == "number" ? process.exit(c) : (setInterval(() => {
+          }, 1e3), process.kill(process.pid, a));
+        });
+      }
+      F.exports = J;
+      require.main === F && J(process.argv.slice(2));
+    });
+    var I = N();
+    var Oe = K();
+    module2.exports = I;
+    module2.exports.config = I.config;
+    module2.exports.configDotenv = I.configDotenv;
+    module2.exports.parse = I.parse;
+    module2.exports.populate = I.populate;
+    require.main === module2 && Oe(process.argv.slice(2));
+  }
+});
+
 // node_modules/sql-escaper/lib/index.js
 var require_lib = __commonJS({
   "node_modules/sql-escaper/lib/index.js"(exports2) {
@@ -826,8 +1216,8 @@ var require_parser_cache = __commonJS({
       }
       return Boolean(nestTables);
     }
-    function optionBits(type, options, config2, nestTables, dateStrings) {
-      return (type === "binary" ? 1 : 0) | (options.rowsAsArray ? 2 : 0) | (options.supportBigNumbers || config2.supportBigNumbers ? 4 : 0) | (options.bigNumberStrings || config2.bigNumberStrings ? 8 : 0) | typeCastKind(options.typeCast) << 4 | (options.decimalNumbers ? 64 : 0) | (config2.jsonStrings ? 128 : 0) | (nestTables === true ? 256 : 0) | (typeof nestTables === "string" ? 512 : 0) | (dateStrings === true ? 1024 : 0) | (Array.isArray(dateStrings) ? 2048 : 0);
+    function optionBits(type, options, config3, nestTables, dateStrings) {
+      return (type === "binary" ? 1 : 0) | (options.rowsAsArray ? 2 : 0) | (options.supportBigNumbers || config3.supportBigNumbers ? 4 : 0) | (options.bigNumberStrings || config3.bigNumberStrings ? 8 : 0) | typeCastKind(options.typeCast) << 4 | (options.decimalNumbers ? 64 : 0) | (config3.jsonStrings ? 128 : 0) | (nestTables === true ? 256 : 0) | (typeof nestTables === "string" ? 512 : 0) | (dateStrings === true ? 1024 : 0) | (Array.isArray(dateStrings) ? 2048 : 0);
     }
     function mixNumber(hash, value) {
       return Math.imul(hash ^ (value | 0), 2654435761) | 0;
@@ -842,15 +1232,15 @@ var require_parser_cache = __commonJS({
       }
       return hash;
     }
-    function hashKey(type, fields, options, config2) {
+    function hashKey(type, fields, options, config3) {
       const nestTables = nestTablesKey(options.nestTables);
-      const dateStrings = dateStringsKey(options.dateStrings || config2.dateStrings);
+      const dateStrings = dateStringsKey(options.dateStrings || config3.dateStrings);
       const includeTable = nestTables !== false;
       let hash = mixNumber(
         2166136261,
-        optionBits(type, options, config2, nestTables, dateStrings)
+        optionBits(type, options, config3, nestTables, dateStrings)
       );
-      hash = mixString(hash, String(options.timezone || config2.timezone));
+      hash = mixString(hash, String(options.timezone || config3.timezone));
       if (typeof nestTables === "string") {
         hash = mixString(hash, nestTables);
       }
@@ -892,20 +1282,20 @@ var require_parser_cache = __commonJS({
       return true;
     }
     var Entry = class {
-      constructor(parser, type, fields, options, config2) {
+      constructor(parser, type, fields, options, config3) {
         this.parser = parser;
         this.nestTables = nestTablesKey(options.nestTables);
         this.dateStrings = dateStringsKey(
-          options.dateStrings || config2.dateStrings
+          options.dateStrings || config3.dateStrings
         );
         this.optionBits = optionBits(
           type,
           options,
-          config2,
+          config3,
           this.nestTables,
           this.dateStrings
         );
-        this.timezone = String(options.timezone || config2.timezone);
+        this.timezone = String(options.timezone || config3.timezone);
         const count = fields.length;
         this.columnTypes = new Array(count);
         this.characterSets = new Array(count);
@@ -929,12 +1319,12 @@ var require_parser_cache = __commonJS({
           }
         }
       }
-      matches(type, fields, options, config2) {
+      matches(type, fields, options, config3) {
         const nestTables = nestTablesKey(options.nestTables);
         const dateStrings = dateStringsKey(
-          options.dateStrings || config2.dateStrings
+          options.dateStrings || config3.dateStrings
         );
-        if (this.optionBits !== optionBits(type, options, config2, nestTables, dateStrings) || this.nestTables !== nestTables || this.timezone !== String(options.timezone || config2.timezone) || this.names.length !== fields.length) {
+        if (this.optionBits !== optionBits(type, options, config3, nestTables, dateStrings) || this.nestTables !== nestTables || this.timezone !== String(options.timezone || config3.timezone) || this.names.length !== fields.length) {
           return false;
         }
         if (Array.isArray(dateStrings) && !sameList(this.dateStrings, dateStrings)) {
@@ -949,22 +1339,22 @@ var require_parser_cache = __commonJS({
         return true;
       }
     };
-    function getParser(type, fields, options, config2, compiler) {
-      const hash = hashKey(type, fields, options, config2);
+    function getParser(type, fields, options, config3, compiler) {
+      const hash = hashKey(type, fields, options, config3);
       let entries = parserCache.get(hash);
       if (entries !== void 0) {
         for (let i = 0; i < entries.length; ++i) {
-          if (entries[i].matches(type, fields, options, config2)) {
+          if (entries[i].matches(type, fields, options, config3)) {
             return entries[i].parser;
           }
         }
       }
-      const parser = compiler(fields, options, config2);
+      const parser = compiler(fields, options, config3);
       if (entries === void 0) {
         entries = [];
         parserCache.set(hash, entries);
       }
-      entries.push(new Entry(parser, type, fields, options, config2));
+      entries.push(new Entry(parser, type, fields, options, config3));
       return parser;
     }
     function setMaxCache(max) {
@@ -10373,8 +10763,8 @@ var require_local_date = __commonJS({
       }
       return new Date(wallTime - offset);
     }
-    function usesLocalDate(field, options, config2) {
-      const timezone = options.timezone || config2.timezone;
+    function usesLocalDate(field, options, config3) {
+      const timezone = options.timezone || config3.timezone;
       if (timezone && timezone !== "local") {
         return false;
       }
@@ -10384,7 +10774,7 @@ var require_local_date = __commonJS({
       }
       return !helpers.typeMatch(
         type,
-        options.dateStrings || config2.dateStrings,
+        options.dateStrings || config3.dateStrings,
         Types
       );
     }
@@ -15722,19 +16112,19 @@ var require_text_parser = __commonJS({
     for (const t in Types) {
       typeNames[Types[t]] = t;
     }
-    function readCodeFor(field, encodingExpr, config2, options) {
+    function readCodeFor(field, encodingExpr, config3, options) {
       const type = field.columnType;
       const charset = field.characterSet;
       const supportBigNumbers = Boolean(
-        options.supportBigNumbers || config2.supportBigNumbers
+        options.supportBigNumbers || config3.supportBigNumbers
       );
       const bigNumberStrings = Boolean(
-        options.bigNumberStrings || config2.bigNumberStrings
+        options.bigNumberStrings || config3.bigNumberStrings
       );
-      const timezone = options.timezone || config2.timezone;
-      const dateStrings = options.dateStrings || config2.dateStrings;
+      const timezone = options.timezone || config3.timezone;
+      const dateStrings = options.dateStrings || config3.dateStrings;
       if (field.extendedFormat === "json") {
-        return config2.jsonStrings ? `packet.readLengthCodedString(${encodingExpr})` : `packet.parseJson(${encodingExpr}, ${supportBigNumbers})`;
+        return config3.jsonStrings ? `packet.readLengthCodedString(${encodingExpr})` : `packet.parseJson(${encodingExpr}, ${supportBigNumbers})`;
       }
       switch (type) {
         case Types.TINY:
@@ -15755,7 +16145,7 @@ var require_text_parser = __commonJS({
           return "packet.readLengthCodedNumber()";
         case Types.DECIMAL:
         case Types.NEWDECIMAL:
-          if (config2.decimalNumbers) {
+          if (config3.decimalNumbers) {
             return "packet.parseLengthCodedFloat()";
           }
           return 'packet.readLengthCodedString("ascii")';
@@ -15777,7 +16167,7 @@ var require_text_parser = __commonJS({
         case Types.VECTOR:
           return "packet.parseVector()";
         case Types.JSON:
-          return config2.jsonStrings ? 'packet.readLengthCodedString("utf8")' : `packet.parseJson("utf8", ${supportBigNumbers})`;
+          return config3.jsonStrings ? 'packet.readLengthCodedString("utf8")' : `packet.parseJson("utf8", ${supportBigNumbers})`;
         default:
           if (charset === Charsets.BINARY) {
             return "packet.readLengthCodedBuffer()";
@@ -15785,9 +16175,9 @@ var require_text_parser = __commonJS({
           return `packet.readLengthCodedString(${encodingExpr})`;
       }
     }
-    function compile(fields, options, config2) {
-      if (typeof config2.typeCast === "function" && typeof options.typeCast !== "function") {
-        options.typeCast = config2.typeCast;
+    function compile(fields, options, config3) {
+      if (typeof config3.typeCast === "function" && typeof options.typeCast !== "function") {
+        options.typeCast = config3.typeCast;
       }
       function wrap(field, _this) {
         return {
@@ -15823,7 +16213,7 @@ var require_text_parser = __commonJS({
         parserFn("this[`wrap${i}`] = wrap(fields[i], _this);");
         parserFn("}");
       }
-      if (fields.some((field) => LocalDate.usesLocalDate(field, options, config2))) {
+      if (fields.some((field) => LocalDate.usesLocalDate(field, options, config3))) {
         parserFn("LocalDate.checkTimezone();");
       }
       parserFn("}");
@@ -15865,7 +16255,7 @@ var require_text_parser = __commonJS({
           parserFn(`${lvalue} = packet.readLengthCodedBuffer();`);
         } else {
           const encodingExpr = `fields[${i}].encoding`;
-          const readCode = readCodeFor(fields[i], encodingExpr, config2, options);
+          const readCode = readCodeFor(fields[i], encodingExpr, config3, options);
           if (typeof options.typeCast === "function") {
             parserFn(
               `${lvalue} = options.typeCast(this.wrap${i}, function() { return ${readCode} });`
@@ -15878,7 +16268,7 @@ var require_text_parser = __commonJS({
       parserFn("return result;");
       parserFn("}");
       parserFn("};")("})()");
-      if (config2.debug) {
+      if (config3.debug) {
         helpers.printDebugWithCode(
           "Compiled text protocol row parser",
           parserFn.toString()
@@ -15886,8 +16276,8 @@ var require_text_parser = __commonJS({
       }
       return parserFn.toFunction({ wrap, LocalDate });
     }
-    function getTextParser(fields, options, config2) {
-      return parserCache.getParser("text", fields, options, config2, compile);
+    function getTextParser(fields, options, config3) {
+      return parserCache.getParser("text", fields, options, config3, compile);
     }
     module2.exports = getTextParser;
   }
@@ -15911,19 +16301,19 @@ var require_static_text_parser = __commonJS({
       type,
       charset,
       encoding,
-      config: config2,
+      config: config3,
       options
     }) {
       const supportBigNumbers = Boolean(
-        options.supportBigNumbers || config2.supportBigNumbers
+        options.supportBigNumbers || config3.supportBigNumbers
       );
       const bigNumberStrings = Boolean(
-        options.bigNumberStrings || config2.bigNumberStrings
+        options.bigNumberStrings || config3.bigNumberStrings
       );
-      const timezone = options.timezone || config2.timezone;
-      const dateStrings = options.dateStrings || config2.dateStrings;
+      const timezone = options.timezone || config3.timezone;
+      const dateStrings = options.dateStrings || config3.dateStrings;
       if (field.extendedFormat === "json") {
-        return config2.jsonStrings ? packet.readLengthCodedString(encoding) : packet.parseJson(encoding, supportBigNumbers);
+        return config3.jsonStrings ? packet.readLengthCodedString(encoding) : packet.parseJson(encoding, supportBigNumbers);
       }
       switch (type) {
         case Types.TINY:
@@ -15943,7 +16333,7 @@ var require_static_text_parser = __commonJS({
         case Types.NULL:
         case Types.DECIMAL:
         case Types.NEWDECIMAL:
-          if (config2.decimalNumbers) {
+          if (config3.decimalNumbers) {
             return packet.parseLengthCodedFloat();
           }
           return packet.readLengthCodedString("ascii");
@@ -15965,7 +16355,7 @@ var require_static_text_parser = __commonJS({
         case Types.VECTOR:
           return packet.parseVector();
         case Types.JSON:
-          return config2.jsonStrings ? packet.readLengthCodedString("utf8") : packet.parseJson("utf8", supportBigNumbers);
+          return config3.jsonStrings ? packet.readLengthCodedString("utf8") : packet.parseJson("utf8", supportBigNumbers);
         default:
           if (charset === Charsets.BINARY) {
             return packet.readLengthCodedBuffer();
@@ -15998,8 +16388,8 @@ var require_static_text_parser = __commonJS({
         }
       };
     }
-    function getTextParser(fields, options, config2) {
-      if (fields.some((field) => LocalDate.usesLocalDate(field, options, config2))) {
+    function getTextParser(fields, options, config3) {
+      if (fields.some((field) => LocalDate.usesLocalDate(field, options, config3))) {
         LocalDate.checkTimezone();
       }
       return {
@@ -16007,14 +16397,14 @@ var require_static_text_parser = __commonJS({
           const result = options2.rowsAsArray ? [] : {};
           for (let i = 0; i < fields2.length; i++) {
             const field = fields2[i];
-            const typeCast = options2.typeCast ? options2.typeCast : config2.typeCast;
+            const typeCast = options2.typeCast ? options2.typeCast : config3.typeCast;
             const next = () => readField({
               packet,
               field,
               type: field.columnType,
               encoding: field.encoding,
               charset: field.characterSet,
-              config: config2,
+              config: config3,
               options: options2
             });
             let value;
@@ -16515,56 +16905,56 @@ var require_connection_config = __commonJS({
       // and every later options read stays a monomorphic in-object load. The
       // key list mirrors the constructor above; test/unit/connection/
       // test-query-options.test.mts fails when the two drift apart.
-      static queryOptions(config2, overrides) {
-        if (!(config2 instanceof _ConnectionConfig)) {
-          return Object.assign({}, config2, overrides);
+      static queryOptions(config3, overrides) {
+        if (!(config3 instanceof _ConnectionConfig)) {
+          return Object.assign({}, config3, overrides);
         }
         const options = {
-          isServer: config2.isServer,
-          stream: config2.stream,
-          host: config2.host,
-          port: config2.port,
-          localAddress: config2.localAddress,
-          socketPath: config2.socketPath,
-          user: config2.user,
-          password: config2.password,
-          password2: config2.password2,
-          password3: config2.password3,
-          passwordSha1: config2.passwordSha1,
-          database: config2.database,
-          connectTimeout: config2.connectTimeout,
-          insecureAuth: config2.insecureAuth,
-          infileStreamFactory: config2.infileStreamFactory,
-          supportBigNumbers: config2.supportBigNumbers,
-          bigNumberStrings: config2.bigNumberStrings,
-          decimalNumbers: config2.decimalNumbers,
-          dateStrings: config2.dateStrings,
-          debug: config2.debug,
-          trace: config2.trace,
-          stringifyObjects: config2.stringifyObjects,
-          enableKeepAlive: config2.enableKeepAlive,
-          keepAliveInitialDelay: config2.keepAliveInitialDelay,
-          timezone: config2.timezone,
-          queryFormat: config2.queryFormat,
-          pool: config2.pool,
-          ssl: config2.ssl,
-          multipleStatements: config2.multipleStatements,
-          rowsAsArray: config2.rowsAsArray,
-          namedPlaceholders: config2.namedPlaceholders,
-          nestTables: config2.nestTables,
-          typeCast: config2.typeCast,
-          disableEval: config2.disableEval,
-          enableCleartextPlugin: config2.enableCleartextPlugin,
-          maxPacketSize: config2.maxPacketSize,
-          charsetNumber: config2.charsetNumber,
-          compress: config2.compress,
-          authPlugins: config2.authPlugins,
-          authSwitchHandler: config2.authSwitchHandler,
-          clientFlags: config2.clientFlags,
-          connectAttributes: config2.connectAttributes,
-          maxPreparedStatements: config2.maxPreparedStatements,
-          jsonStrings: config2.jsonStrings,
-          gracefulEnd: config2.gracefulEnd
+          isServer: config3.isServer,
+          stream: config3.stream,
+          host: config3.host,
+          port: config3.port,
+          localAddress: config3.localAddress,
+          socketPath: config3.socketPath,
+          user: config3.user,
+          password: config3.password,
+          password2: config3.password2,
+          password3: config3.password3,
+          passwordSha1: config3.passwordSha1,
+          database: config3.database,
+          connectTimeout: config3.connectTimeout,
+          insecureAuth: config3.insecureAuth,
+          infileStreamFactory: config3.infileStreamFactory,
+          supportBigNumbers: config3.supportBigNumbers,
+          bigNumberStrings: config3.bigNumberStrings,
+          decimalNumbers: config3.decimalNumbers,
+          dateStrings: config3.dateStrings,
+          debug: config3.debug,
+          trace: config3.trace,
+          stringifyObjects: config3.stringifyObjects,
+          enableKeepAlive: config3.enableKeepAlive,
+          keepAliveInitialDelay: config3.keepAliveInitialDelay,
+          timezone: config3.timezone,
+          queryFormat: config3.queryFormat,
+          pool: config3.pool,
+          ssl: config3.ssl,
+          multipleStatements: config3.multipleStatements,
+          rowsAsArray: config3.rowsAsArray,
+          namedPlaceholders: config3.namedPlaceholders,
+          nestTables: config3.nestTables,
+          typeCast: config3.typeCast,
+          disableEval: config3.disableEval,
+          enableCleartextPlugin: config3.enableCleartextPlugin,
+          maxPacketSize: config3.maxPacketSize,
+          charsetNumber: config3.charsetNumber,
+          compress: config3.compress,
+          authPlugins: config3.authPlugins,
+          authSwitchHandler: config3.authSwitchHandler,
+          clientFlags: config3.clientFlags,
+          connectAttributes: config3.connectAttributes,
+          maxPreparedStatements: config3.maxPreparedStatements,
+          jsonStrings: config3.jsonStrings,
+          gracefulEnd: config3.gracefulEnd
         };
         return Object.assign(options, overrides);
       }
@@ -17025,18 +17415,18 @@ var require_binary_parser = __commonJS({
     for (const t in Types) {
       typeNames[Types[t]] = t;
     }
-    function readCodeFor(field, config2, options, fieldNum) {
+    function readCodeFor(field, config3, options, fieldNum) {
       const supportBigNumbers = Boolean(
-        options.supportBigNumbers || config2.supportBigNumbers
+        options.supportBigNumbers || config3.supportBigNumbers
       );
       const bigNumberStrings = Boolean(
-        options.bigNumberStrings || config2.bigNumberStrings
+        options.bigNumberStrings || config3.bigNumberStrings
       );
-      const timezone = options.timezone || config2.timezone;
-      const dateStrings = options.dateStrings || config2.dateStrings;
+      const timezone = options.timezone || config3.timezone;
+      const dateStrings = options.dateStrings || config3.dateStrings;
       const unsigned = field.flags & FieldFlags.UNSIGNED;
       if (field.extendedFormat === "json") {
-        return config2.jsonStrings ? `packet.readLengthCodedString(fields[${fieldNum}].encoding)` : `packet.parseJson(fields[${fieldNum}].encoding, ${supportBigNumbers});`;
+        return config3.jsonStrings ? `packet.readLengthCodedString(fields[${fieldNum}].encoding)` : `packet.parseJson(fields[${fieldNum}].encoding, ${supportBigNumbers});`;
       }
       switch (field.columnType) {
         case Types.TINY:
@@ -17066,7 +17456,7 @@ var require_binary_parser = __commonJS({
           return "packet.readTimeString()";
         case Types.DECIMAL:
         case Types.NEWDECIMAL:
-          if (config2.decimalNumbers) {
+          if (config3.decimalNumbers) {
             return "packet.parseLengthCodedFloat();";
           }
           return 'packet.readLengthCodedString("ascii");';
@@ -17075,7 +17465,7 @@ var require_binary_parser = __commonJS({
         case Types.VECTOR:
           return "packet.parseVector()";
         case Types.JSON:
-          return config2.jsonStrings ? 'packet.readLengthCodedString("utf8")' : `packet.parseJson("utf8", ${supportBigNumbers});`;
+          return config3.jsonStrings ? 'packet.readLengthCodedString("utf8")' : `packet.parseJson("utf8", ${supportBigNumbers});`;
         case Types.LONGLONG:
           if (!supportBigNumbers) {
             return unsigned ? "packet.readInt64JSNumber();" : "packet.readSInt64JSNumber();";
@@ -17091,7 +17481,7 @@ var require_binary_parser = __commonJS({
           return `packet.readLengthCodedString(fields[${fieldNum}].encoding)`;
       }
     }
-    function compile(fields, options, config2) {
+    function compile(fields, options, config3) {
       const parserFn = genFunc();
       const nullBitmapLength = Math.floor((fields.length + 7 + 2) / 8);
       function fieldMetadata(field) {
@@ -17157,7 +17547,7 @@ var require_binary_parser = __commonJS({
       parserFn("(function(){");
       parserFn("return class BinaryRow {");
       parserFn("constructor() {");
-      if (fields.some((field) => LocalDate.usesLocalDate(field, options, config2))) {
+      if (fields.some((field) => LocalDate.usesLocalDate(field, options, config3))) {
         parserFn("LocalDate.checkTimezone();");
       }
       parserFn("}");
@@ -17167,8 +17557,8 @@ var require_binary_parser = __commonJS({
       } else {
         parserFn("const result = {};");
       }
-      if (typeof config2.typeCast === "function" && typeof options.typeCast !== "function") {
-        options.typeCast = config2.typeCast;
+      if (typeof config3.typeCast === "function" && typeof options.typeCast !== "function") {
+        options.typeCast = config3.typeCast;
       }
       parserFn("packet.readInt8();");
       for (let i = 0; i < nullBitmapLength; ++i) {
@@ -17206,7 +17596,7 @@ var require_binary_parser = __commonJS({
         if (options.typeCast === false) {
           parserFn(`${lvalue} = packet.readLengthCodedBuffer();`);
         } else {
-          const readCode = readCodeFor(fields[i], config2, options, i);
+          const readCode = readCodeFor(fields[i], config3, options, i);
           if (typeof options.typeCast === "function") {
             const fieldWrapperVar = `fieldWrapper${i}`;
             parserFn(`const ${fieldWrapperVar} = wrap(fields[${i}], packet);`);
@@ -17227,7 +17617,7 @@ var require_binary_parser = __commonJS({
       parserFn("return result;");
       parserFn("}");
       parserFn("};")("})()");
-      if (config2.debug) {
+      if (config3.debug) {
         helpers.printDebugWithCode(
           "Compiled binary protocol row parser",
           parserFn.toString()
@@ -17235,8 +17625,8 @@ var require_binary_parser = __commonJS({
       }
       return parserFn.toFunction({ wrap, wrapNull, LocalDate });
     }
-    function getBinaryParser(fields, options, config2) {
-      return parserCache.getParser("binary", fields, options, config2, compile);
+    function getBinaryParser(fields, options, config3) {
+      return parserCache.getParser("binary", fields, options, config3, compile);
     }
     module2.exports = getBinaryParser;
   }
@@ -17255,22 +17645,22 @@ var require_static_binary_parser = __commonJS({
     for (const t in Types) {
       typeNames[Types[t]] = t;
     }
-    function getBinaryParser(fields, queryOptions, config2) {
-      if (fields.some((field) => LocalDate.usesLocalDate(field, queryOptions, config2))) {
+    function getBinaryParser(fields, queryOptions, config3) {
+      if (fields.some((field) => LocalDate.usesLocalDate(field, queryOptions, config3))) {
         LocalDate.checkTimezone();
       }
-      function readCode(field, config3, options, fieldNum, packet) {
+      function readCode(field, config4, options, fieldNum, packet) {
         const supportBigNumbers = Boolean(
-          options.supportBigNumbers || config3.supportBigNumbers
+          options.supportBigNumbers || config4.supportBigNumbers
         );
         const bigNumberStrings = Boolean(
-          options.bigNumberStrings || config3.bigNumberStrings
+          options.bigNumberStrings || config4.bigNumberStrings
         );
-        const timezone = options.timezone || config3.timezone;
-        const dateStrings = options.dateStrings || config3.dateStrings;
+        const timezone = options.timezone || config4.timezone;
+        const dateStrings = options.dateStrings || config4.dateStrings;
         const unsigned = field.flags & FieldFlags.UNSIGNED;
         if (field.extendedFormat === "json") {
-          return config3.jsonStrings ? packet.readLengthCodedString(field.encoding) : packet.parseJson(field.encoding, supportBigNumbers);
+          return config4.jsonStrings ? packet.readLengthCodedString(field.encoding) : packet.parseJson(field.encoding, supportBigNumbers);
         }
         switch (field.columnType) {
           case Types.TINY:
@@ -17301,13 +17691,13 @@ var require_static_binary_parser = __commonJS({
             return packet.readTimeString();
           case Types.DECIMAL:
           case Types.NEWDECIMAL:
-            return config3.decimalNumbers ? packet.parseLengthCodedFloat() : packet.readLengthCodedString("ascii");
+            return config4.decimalNumbers ? packet.parseLengthCodedFloat() : packet.readLengthCodedString("ascii");
           case Types.GEOMETRY:
             return packet.parseGeometryValue();
           case Types.VECTOR:
             return packet.parseVector();
           case Types.JSON:
-            return config3.jsonStrings ? packet.readLengthCodedString("utf8") : packet.parseJson("utf8", supportBigNumbers);
+            return config4.jsonStrings ? packet.readLengthCodedString("utf8") : packet.parseJson("utf8", supportBigNumbers);
           case Types.LONGLONG:
             if (!supportBigNumbers)
               return unsigned ? packet.readInt64JSNumber() : packet.readSInt64JSNumber();
@@ -17351,14 +17741,14 @@ var require_static_binary_parser = __commonJS({
           let nullByteIndex = 0;
           for (let i = 0; i < fields2.length; i++) {
             const field = fields2[i];
-            const typeCast = options.typeCast !== void 0 ? options.typeCast : config2.typeCast;
+            const typeCast = options.typeCast !== void 0 ? options.typeCast : config3.typeCast;
             let value;
             if (nullBitmaskBytes[nullByteIndex] & currentFieldNullBit) {
               value = typeof typeCast === "function" ? typeCast(wrapNull(field), () => null) : null;
             } else if (options.typeCast === false) {
               value = packet.readLengthCodedBuffer();
             } else {
-              const next = () => readCode(field, config2, options, i, packet);
+              const next = () => readCode(field, config3, options, i, packet);
               value = typeof typeCast === "function" ? typeCast(
                 {
                   type: typeNames[field.columnType],
@@ -18193,13 +18583,13 @@ var require_tracing = __commonJS({
     var executeChannel = hasTracingChannel ? dc.tracingChannel("mysql2:execute") : void 0;
     var connectChannel = hasTracingChannel ? dc.tracingChannel("mysql2:connect") : void 0;
     var poolConnectChannel = hasTracingChannel ? dc.tracingChannel("mysql2:pool:connect") : void 0;
-    function getServerContext(config2) {
-      if (config2.socketPath) {
-        return { serverAddress: config2.socketPath, serverPort: void 0 };
+    function getServerContext(config3) {
+      if (config3.socketPath) {
+        return { serverAddress: config3.socketPath, serverPort: void 0 };
       }
       return {
-        serverAddress: config2.host || "localhost",
-        serverPort: config2.port || 3306
+        serverAddress: config3.host || "localhost",
+        serverPort: config3.port || 3306
       };
     }
     function shouldTrace(channel) {
@@ -18295,20 +18685,20 @@ var require_named_placeholders = __commonJS({
       }
       return [query];
     }
-    function createCompiler(config2) {
-      if (!config2) config2 = {};
-      if (!config2.placeholder) {
-        config2.placeholder = "?";
+    function createCompiler(config3) {
+      if (!config3) config3 = {};
+      if (!config3.placeholder) {
+        config3.placeholder = "?";
       }
       let ncache = 100;
       let cache;
-      if (typeof config2.cache === "number") {
-        ncache = config2.cache;
+      if (typeof config3.cache === "number") {
+        ncache = config3.cache;
       }
-      if (typeof config2.cache === "object") {
-        cache = config2.cache;
+      if (typeof config3.cache === "object") {
+        cache = config3.cache;
       }
-      if (config2.cache !== false && !cache) {
+      if (config3.cache !== false && !cache) {
         cache = require_lib2().createLRU({ max: ncache });
       }
       function toArrayParams(tree, params) {
@@ -18339,17 +18729,17 @@ var require_named_placeholders = __commonJS({
         let unnamed = noTailingSemicolon(tree[0][0]);
         for (let i = 1; i < tree[0].length; ++i) {
           if (tree[0][i - 1].slice(-1) === ":") {
-            unnamed += config2.placeholder;
+            unnamed += config3.placeholder;
           }
-          unnamed += config2.placeholder;
+          unnamed += config3.placeholder;
           unnamed += noTailingSemicolon(tree[0][i]);
         }
         const last = tree[0][tree[0].length - 1];
         if (tree[0].length === tree[1].length) {
           if (last.slice(-1) === ":") {
-            unnamed += config2.placeholder;
+            unnamed += config3.placeholder;
           }
-          unnamed += config2.placeholder;
+          unnamed += config3.placeholder;
         }
         return [unnamed, tree[1]];
       }
@@ -18546,7 +18936,7 @@ var require_connection = __commonJS({
           });
           this.addCommand(handshakeCommand);
           if (shouldTrace(connectChannel)) {
-            const config2 = this.config;
+            const config3 = this.config;
             tracePromise(
               connectChannel,
               () => new Promise((resolve, reject) => {
@@ -18563,12 +18953,12 @@ var require_connection = __commonJS({
                 this.once("error", onError);
               }),
               () => {
-                const server2 = getServerContext(config2);
+                const server2 = getServerContext(config3);
                 return {
-                  database: config2.database || "",
+                  database: config3.database || "",
                   serverAddress: server2.serverAddress,
                   serverPort: server2.serverPort,
-                  user: config2.user || ""
+                  user: config3.user || ""
                 };
               }
             ).catch(() => {
@@ -19361,10 +19751,10 @@ var require_connection = __commonJS({
         this.addCommand = this._addCommandClosedState;
         return quitCmd;
       }
-      static createQuery(sql, values, cb, config2) {
+      static createQuery(sql, values, cb, config3) {
         let options = {
-          rowsAsArray: config2.rowsAsArray,
-          infileStreamFactory: config2.infileStreamFactory
+          rowsAsArray: config3.rowsAsArray,
+          infileStreamFactory: config3.infileStreamFactory
         };
         if (typeof sql === "object") {
           options = {
@@ -19914,15 +20304,15 @@ var require_pool = __commonJS({
           this.emit("enqueue");
           return this._connectionQueue.push(cb2);
         };
-        const config2 = this.config.connectionConfig;
+        const config3 = this.config.connectionConfig;
         traceCallback(
           poolConnectChannel,
           _getConnection,
           0,
           () => {
-            const server2 = getServerContext(config2);
+            const server2 = getServerContext(config3);
             return {
-              database: config2.database || "",
+              database: config3.database || "",
               serverAddress: server2.serverAddress,
               serverPort: server2.serverPort
             };
@@ -20420,13 +20810,13 @@ var require_pool_cluster = __commonJS({
       }
     };
     var PoolCluster = class extends EventEmitter {
-      constructor(config2) {
+      constructor(config3) {
         super();
-        config2 = config2 || {};
-        this._canRetry = typeof config2.canRetry === "undefined" ? true : config2.canRetry;
-        this._removeNodeErrorCount = config2.removeNodeErrorCount || 5;
-        this._restoreNodeTimeout = config2.restoreNodeTimeout || 0;
-        this._defaultSelector = config2.defaultSelector || "RR";
+        config3 = config3 || {};
+        this._canRetry = typeof config3.canRetry === "undefined" ? true : config3.canRetry;
+        this._removeNodeErrorCount = config3.removeNodeErrorCount || 5;
+        this._restoreNodeTimeout = config3.restoreNodeTimeout || 0;
+        this._defaultSelector = config3.defaultSelector || "RR";
         this._closed = false;
         this._lastId = 0;
         this._nodes = {};
@@ -20447,16 +20837,16 @@ var require_pool_cluster = __commonJS({
         }
         return this._namespaces[key];
       }
-      add(id, config2) {
+      add(id, config3) {
         if (typeof id === "object") {
-          config2 = id;
+          config3 = id;
           id = `CLUSTER::${++this._lastId}`;
         }
         if (typeof this._nodes[id] === "undefined") {
           this._nodes[id] = {
             id,
             errorCount: 0,
-            pool: new Pool({ config: new PoolConfig(config2) }),
+            pool: new Pool({ config: new PoolConfig(config3) }),
             _offlineUntil: 0
           };
           this._serviceableNodeIds.push(id);
@@ -20619,8 +21009,8 @@ var require_create_pool = __commonJS({
     "use strict";
     var Pool = require_pool3();
     var PoolConfig = require_pool_config();
-    function createPool(config2) {
-      return new Pool({ config: new PoolConfig(config2) });
+    function createPool(config3) {
+      return new Pool({ config: new PoolConfig(config3) });
     }
     module2.exports = createPool;
   }
@@ -20631,8 +21021,8 @@ var require_create_pool_cluster = __commonJS({
   "node_modules/mysql2/lib/create_pool_cluster.js"(exports2, module2) {
     "use strict";
     var PoolCluster = require_pool_cluster();
-    function createPoolCluster(config2) {
-      return new PoolCluster(config2);
+    function createPoolCluster(config3) {
+      return new PoolCluster(config3);
     }
     module2.exports = createPoolCluster;
   }
@@ -20882,32 +21272,32 @@ var require_promise = __commonJS({
 // src/server.ts
 var import_node_net = __toESM(require("node:net"));
 
-// src/db.ts
-var import_promise = __toESM(require_promise());
-
 // src/config.ts
-var config = {
-  DB_HOST: "192.168.1.200",
-  DB_PORT: 3306,
-  DB_USER: "root",
-  DB_PASSWORD: "root",
-  DB_NAME: "tcp-server",
-  TCP_PORT: 5005
+var dotenv = __toESM(require_dist());
+dotenv.config();
+var config2 = {
+  DB_HOST: process.env.DB_HOST || "192.168.1.200",
+  DB_PORT: parseInt(process.env.DB_PORT || "") || 3307,
+  DB_USER: process.env.DB_USER || "root",
+  DB_PASSWORD: process.env.DB_PASSWORD || "root",
+  DB_NAME: process.env.DB_NAME || "tcp-server",
+  TCP_PORT: parseInt(process.env.TCP_PORT || "") || 5005
 };
 
 // src/db.ts
+var import_promise = __toESM(require_promise());
 var db = import_promise.default.createPool({
-  host: config.DB_HOST,
-  port: config.DB_PORT,
-  user: config.DB_USER,
-  password: config.DB_PASSWORD,
-  database: config.DB_NAME,
+  host: config2.DB_HOST,
+  port: config2.DB_PORT,
+  user: config2.DB_USER,
+  password: config2.DB_PASSWORD,
+  database: config2.DB_NAME,
   connectionLimit: 10
 });
 var db_default = db;
 
-// src/server.ts
-async function testDatabaseConnection() {
+// src/utils/lib.ts
+var testDatabaseConnection = async () => {
   try {
     const connection = await db_default.getConnection();
     console.log("MySQL connected successfully");
@@ -20916,7 +21306,9 @@ async function testDatabaseConnection() {
     console.error("MySQL connection failed:", error);
     process.exit(1);
   }
-}
+};
+
+// src/server.ts
 var server = import_node_net.default.createServer((socket) => {
   const clientIP = socket.remoteAddress ?? "unknown";
   const clientPort = socket.remotePort ?? 0;
@@ -20934,20 +21326,14 @@ var server = import_node_net.default.createServer((socket) => {
         console.log("Empty data received");
         return;
       }
-      const [result] = await db_default.execute(
+      await db_default.execute(
         `
-          INSERT INTO received_data
-          (
-            client_ip,
-            client_port,
-            message
-          )
-          VALUES (?, ?, ?)
+          INSERT INTO received_data (value)
+          VALUES (?)
         `,
-        [clientIP, clientPort, message]
+        [message]
       );
       console.log("Data saved to MySQL");
-      console.log("Insert result:", result);
       socket.write("OK: Data received\n");
     } catch (error) {
       console.error("Database error:", error);
@@ -20961,17 +21347,17 @@ var server = import_node_net.default.createServer((socket) => {
     console.error(`Socket error from ${clientIP}:`, error.message);
   });
 });
-async function startServer() {
+var startServer = async () => {
   await testDatabaseConnection();
-  server.listen(config.TCP_PORT, "0.0.0.0", () => {
+  server.listen(config2.TCP_PORT, "0.0.0.0", () => {
     console.log("--------------------------------");
-    console.log("TCP SERVER STARTED");
+    console.log("TCP SERVER STARTED SUCCESSFULLY");
     console.log("--------------------------------");
-    console.log(`TCP Port : ${config.TCP_PORT}`);
-    console.log(`MySQL    : ${config.DB_HOST}:${config.DB_PORT}`);
+    console.log(`TCP Port : ${config2.TCP_PORT}`);
+    console.log(`MySQL    : ${config2.DB_HOST}:${config2.DB_PORT}`);
     console.log("--------------------------------");
   });
-}
+};
 startServer();
 /*! Bundled license information:
 

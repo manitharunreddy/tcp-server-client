@@ -128,19 +128,14 @@ Table:
 received_data
 ```
 
-Example table:
+The server stores plain strings in `received_data`.
+The schema is defined in `server/sqlQueries.sql`:
 
 ```sql
-CREATE DATABASE IF NOT EXISTS `tcp-server`;
-
-USE `tcp-server`;
-
 CREATE TABLE IF NOT EXISTS received_data (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    client_ip VARCHAR(45) NOT NULL,
-    client_port INT NOT NULL,
-    message LONGTEXT NOT NULL,
-    received_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    value VARCHAR(256) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 ```
 
@@ -252,14 +247,7 @@ Connect to MySQL and run:
 ```sql
 USE `tcp-server`;
 
-SELECT
-    id,
-    client_ip,
-    client_port,
-    message,
-    received_at
-FROM received_data
-ORDER BY id DESC;
+SELECT * FROM received_data ORDER BY id DESC;
 ```
 
 ## Network Requirements

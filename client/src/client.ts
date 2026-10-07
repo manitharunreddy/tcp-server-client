@@ -22,14 +22,12 @@ client.connect(config.SERVER_PORT, config.SERVER_IP, () => {
 
   client.write(data);
 
-  console.log("Data sent:");
-  console.log(data);
+  console.log(`Data sent: ${JSON.stringify(message, null, 2)}`);
 });
 
 client.on("data", (data: Buffer) => {
   console.log("Server response:");
   console.log(data.toString("utf8"));
-
   client.destroy();
 });
 
